@@ -30,5 +30,5 @@ knn = cv2.ml.KNearest_create()
 knn.train(cells, cv2.ml.ROW_SAMPLE, cells_labels)
 ret, result, neighbours, dist = knn.findNearest(test_cells, k=3)
 
-
+print(test_cells[0].shape)
 print(result)
