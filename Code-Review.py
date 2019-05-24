@@ -62,17 +62,22 @@ cap = cv2.VideoCapture(0)
 
 
 while (cap.isOpened()):
+	# handle frame
 	ret, img = cap.read()
 	img = cv2.flip(img, 1)
 	gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	gray = cv2.resize(gray, (20,20))
+	
+	# handle frame to data predict 
 	data_predict = np.copy(gray)
 	data_predict = [data_predict.flatten()]
 	data_predict = np.array(data_predict, dtype=np.float32)
+	
+	# do predict
 	_, result, _, _ = knn.findNearest(data_predict, k=3)
 	print( result )
 	if cv2.waitKey(1) == 27:
-		breal
+		break
 	cv2.imshow('webcam', gray)
 
 cv2.destroyAllWindows()
